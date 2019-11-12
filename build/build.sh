@@ -133,7 +133,7 @@ if [[ $dbg == 1 ]]; then
   cd Debug
   if [[ $nocmake == 0 ]]; then
     echo "$CMAKE -DRDI_CCACHE=$ccache -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ../../src"
-    time $CMAKE -DRDI_CCACHE=$ccache -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ../../src
+    time $CMAKE -DRDI_CCACHE=$ccache -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DBoost_NO_BOOST_CMAKE=ON ../../src
   fi
   echo "make -j $jcore $verbose DESTDIR=$PWD install"
   time make -j $jcore $verbose DESTDIR=$PWD install
@@ -146,7 +146,7 @@ if [[ $opt == 1 ]]; then
   cd Release
   if [[ $nocmake == 0 ]]; then
     echo "$CMAKE -DRDI_CCACHE=$ccache -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ../../src"
-    time $CMAKE -DRDI_CCACHE=$ccache -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ../../src
+    time $CMAKE -DRDI_CCACHE=$ccache -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DBoost_NO_BOOST_CMAKE=ON ../../src
   fi
   echo "make -j $jcore $verbose DESTDIR=$PWD install"
   time make -j $jcore $verbose DESTDIR=$PWD install

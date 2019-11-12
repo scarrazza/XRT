@@ -143,7 +143,7 @@ else()
 
   # For Ubuntu 18.04 and later versions we must link dynamic libraries.  This is because the static
   # openssl library is linked to a dynamic library :-(
-  if ((${LINUX_FLAVOR} STREQUAL Ubuntu) AND (${LINUX_VERSION} VERSION_GREATER 17.10))
+  #if ((${LINUX_FLAVOR} STREQUAL Ubuntu) AND (${LINUX_VERSION} VERSION_GREATER 17.10))
     # Note: The following Ubuntu 18.04 target results in a execution Segmentation Fault
     #       due to dynamic library dependencies in the openssl static library.
     #
@@ -168,19 +168,19 @@ else()
     endif()
     target_link_libraries(xclbinutil ${CMAKE_DL_LIBS})   # Needs to be shared library
     target_link_libraries(xclbinutil -static-libgcc -static-libstdc++)
-  else()
-    target_link_libraries(xclbinutil -static ${Boost_LIBRARIES})
-    target_link_libraries(xclbinutil ${CRYPTO_LIB})
-    target_link_libraries(xclbinutil ${Z_LIB})            # OpenSSL supporting library
-    target_link_libraries(xclbinutil ${DL_LIB})           # OpenSSL supporting library
-    target_link_libraries(xclbinutil ${PTHREAD_LIB})      # OpenSSL supporting library
+    #else()
+    #  target_link_libraries(xclbinutil -static ${Boost_LIBRARIES})
+    #target_link_libraries(xclbinutil ${CRYPTO_LIB})
+    #target_link_libraries(xclbinutil ${Z_LIB})            # OpenSSL supporting library
+    #target_link_libraries(xclbinutil ${DL_LIB})           # OpenSSL supporting library
+    #target_link_libraries(xclbinutil ${PTHREAD_LIB})      # OpenSSL supporting library
 
     # On Ubuntu 18.04 CMake was appending '-Wl,-Bdynamic' to the command line which
     # was causing the executable to reference 'linux-vdso.so.1' which would then
     # produce "Command not found" when running the executable.
     #   Therefore, we direct CMake to end with static, so that it doesn't do that:
-    set_target_properties(xclbinutil PROPERTIES LINK_SEARCH_END_STATIC 1)
-  endif()
+    #set_target_properties(xclbinutil PROPERTIES LINK_SEARCH_END_STATIC 1)
+    #endif()
 endif()
 
 install (TARGETS xclbinutil RUNTIME DESTINATION ${XRT_INSTALL_DIR}/bin)
