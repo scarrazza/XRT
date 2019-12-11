@@ -1611,8 +1611,7 @@ static long qdma_stream_ioctl_alloc_buffer(struct xocl_qdma *qdma,
 	flags = O_CLOEXEC | O_RDWR;
 
 	XOCL_DRM_GEM_OBJECT_GET(&xobj->base);
-	dmabuf = drm_gem_prime_export(XOCL_DRM(xdev)->ddev,
-				&xobj->base, flags);
+	dmabuf = drm_gem_prime_export(&xobj->base, flags);
 	if (IS_ERR(dmabuf)) {
 		xocl_err(&qdma->pdev->dev, "failed to export dma_buf");
 		ret = PTR_ERR(dmabuf);
